@@ -62,4 +62,4 @@ onTap: () async {
 
 See example application for details:
 
-![Example of button disabled after tap](/page/debounced.gif)
+![Example of button disabled after tap](https://github.com/sla-000/flutter_debouncer/blob/master/page/debounced.gif)
