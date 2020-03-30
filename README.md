@@ -11,7 +11,7 @@ Assume your code with some button look like this:
 child: RaisedButton(
   color: Colors.blue,
   disabledColor: Colors.grey,
-  onPressed: () async => await someLongOperation(),
+  onPressed: () async => await someLongOperation(), // your tap handler
   child: const Text('Short'),
   );
 //...
@@ -27,12 +27,12 @@ Wrap this code to Debouncer and move RaisedButton onPressed contents to Debounce
 ```dart
 //...
 child: Debouncer(
-  onTap: () async => await someLongOperation(),
+  onTap: () async => await someLongOperation(), // your tap handler moved here
   builder: (BuildContext context, DebouncerOnTap onTap) {
     return RaisedButton(
       color: Colors.blue,
       disabledColor: Colors.grey,
-      onPressed: onTap,
+      onPressed: onTap,  // It is just onTap from builder callback
       child: const Text('Short'),
     );
   },
@@ -40,7 +40,7 @@ child: Debouncer(
 //...
 ```
 
-Debouncer will disable the RaisedButton by settings onPressed to null while onTap is being executed. 
+Debouncer will disable the RaisedButton by setting onPressed to null while onTap is being executed. 
 
 You can add optional delay to be sure that the button is disabled some time after someOperation is 
 called.
@@ -51,7 +51,6 @@ called.
 onTap: () async {
     someOperation();
     
-    // optional
     await Future<void>.delayed(
       const Duration(milliseconds: 1000),
       () {},
@@ -62,4 +61,4 @@ onTap: () async {
 
 See example application for details:
 
-![](/page/debounced.gif)
+![Example of button disabled after tap](/page/debounced.gif)
