@@ -1,5 +1,5 @@
-import 'package:debouncer/debouncer.dart';
 import 'package:flutter/material.dart';
+import 'package:tap_debouncer/tap_debouncer.dart';
 
 const int kCooldownLong_ms = 3000;
 const int kCooldownShort_ms = 1200;
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Positioned(
             bottom: 20,
             right: 20,
-            child: Debouncer(
+            child: TapDebouncer(
               onTap: () async {
                 _startCooldownIndicator(kCooldownShort_ms);
 
@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   () {},
                 );
               },
-              builder: (BuildContext context, DebouncerOnTap onTap) {
+              builder: (BuildContext context, TapDebouncerFunc onTap) {
                 return RaisedButton(
                   color: Colors.blue,
                   disabledColor: Colors.grey,
@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Positioned(
             bottom: 20,
             left: 20,
-            child: Debouncer(
+            child: TapDebouncer(
               onTap: () async {
                 _startCooldownIndicator(kCooldownLong_ms);
 
@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   () {},
                 );
               },
-              builder: (BuildContext context, DebouncerOnTap onTap) {
+              builder: (BuildContext context, TapDebouncerFunc onTap) {
                 return RaisedButton(
                   color: Colors.green,
                   disabledColor: Colors.grey,
@@ -121,16 +121,16 @@ class _MyHomePageState extends State<MyHomePage> {
           Positioned(
             top: 20,
             left: 20,
-            child: Debouncer(
+            child: TapDebouncer(
               onTap: () async {
                 _incrementCounter();
 
                 await Future<void>.delayed(
-                  Debouncer.kNeverCooldown,
+                  TapDebouncer.kNeverCooldown,
                   () {},
                 );
               },
-              builder: (BuildContext context, DebouncerOnTap onTap) {
+              builder: (BuildContext context, TapDebouncerFunc onTap) {
                 return RaisedButton(
                   color: Colors.pink,
                   disabledColor: Colors.grey,
@@ -143,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Positioned(
             top: 20,
             right: 20,
-            child: Debouncer(
+            child: TapDebouncer(
               onTap: () async {
                 _startCooldownIndicator(kCooldownShort_ms * 2);
 
@@ -163,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 }
               },
-              builder: (BuildContext context, DebouncerOnTap onTap) {
+              builder: (BuildContext context, TapDebouncerFunc onTap) {
                 return RaisedButton(
                   color: Colors.red,
                   disabledColor: Colors.grey,

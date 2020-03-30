@@ -1,4 +1,4 @@
-name: debouncer
+name: tap_debouncer
 description: Tap debounce simplifying widget
 version: 0.0.3
 homepage: https://github.com/sla-000/flutter_debouncer

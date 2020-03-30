@@ -2,11 +2,11 @@ import 'package:flutter/widgets.dart';
 
 import 'debouncer_handler.dart';
 
-typedef DebouncerOnTap = Future<void> Function();
+typedef TapDebouncerFunc = Future<void> Function();
 
 /// Debouncer wrapper widget
-class Debouncer extends StatefulWidget {
-  const Debouncer({
+class TapDebouncer extends StatefulWidget {
+  const TapDebouncer({
     Key key,
     @required this.builder,
     @required this.onTap,
@@ -21,17 +21,17 @@ class Debouncer extends StatefulWidget {
   /// onTap is function to pass to XxxxButton or InkWell
   final Widget Function(
     BuildContext context,
-    DebouncerOnTap onTap,
+    TapDebouncerFunc onTap,
   ) builder;
 
   /// Function to call on tap
   final Future<void> Function() onTap;
 
   @override
-  _DebouncerState createState() => _DebouncerState();
+  _TapDebouncerState createState() => _TapDebouncerState();
 }
 
-class _DebouncerState extends State<Debouncer> {
+class _TapDebouncerState extends State<TapDebouncer> {
   final DebouncerHandler _tapDebouncerHandler = DebouncerHandler();
 
   @override
