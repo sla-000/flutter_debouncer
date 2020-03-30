@@ -29,7 +29,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  int _counterTaps = 0;
   double _cooldown = 0;
   int _cooldownStarted = DateTime.now().millisecondsSinceEpoch;
 
@@ -45,91 +44,50 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Stack(
-        children: <Widget>[
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'You have pushed the debounced button this many times:',
-                ),
-                Text(
-                  '$_counterTaps',
-                  style: Theme.of(context).textTheme.display1,
-                ),
-                const SizedBox(height: 24),
-                const Text(
-                  'Tap detected by debounced button this many times:',
-                ),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.display1,
-                ),
-                const SizedBox(height: 24),
-                const Text(
-                  'Cooldown:',
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-                  child: LinearProgressIndicator(value: _cooldown),
-                ),
-              ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'Tap detected by debounced button this many times:',
             ),
-          ),
-          Positioned(
-            bottom: 20,
-            right: 20,
-            child: Debouncer(
-              onTapCooldown: const Duration(milliseconds: kCooldown_ms),
-              builder: (BuildContext context, DebouncerHandler debouncer) {
-                return FloatingActionButton(
-                  onPressed: () {
-                    final bool processed = debouncer.onTap(_incrementCounter);
-                    debugPrint('processed=$processed');
-
-                    _startCooldownIndicator();
-
-                    _updateCounterTaps();
-                  },
-                  tooltip: 'DebouncerWidget',
-                  child: Icon(Icons.add),
-                );
-              },
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.display1,
             ),
-          ),
-          Positioned(
-            bottom: 20,
-            left: 20,
-            child: TapDebouncer(
-              onTap: () {
-                _incrementCounter();
-
-                _startCooldownIndicator();
-
-                _updateCounterTaps();
-              },
-              onTapCooldown: const Duration(milliseconds: kCooldown_ms),
-              builder: (BuildContext context, void Function() onTap) {
-                return FloatingActionButton(
-                  backgroundColor: Colors.green,
-                  onPressed: onTap,
-                  tooltip: 'TapDebouncerWidget',
-                  child: Icon(Icons.add),
-                );
-              },
+            const SizedBox(height: 24),
+            const Text(
+              'Cooldown:',
             ),
-          ),
-        ],
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+              child: LinearProgressIndicator(value: _cooldown),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: TapDebouncer(
+        onTap: () async {
+          _incrementCounter();
+
+          _startCooldownIndicator();
+
+          await Future<void>.delayed(
+            const Duration(milliseconds: kCooldown_ms),
+            () {},
+          );
+        },
+        builder: (BuildContext context, onTap) {
+          return FloatingActionButton(
+            backgroundColor: Colors.green,
+            onPressed: onTap,
+            tooltip: 'TapDebouncer',
+            child: Icon(Icons.add),
+          );
+        },
       ),
     );
-  }
-
-  void _updateCounterTaps() {
-    setState(() {
-      ++_counterTaps;
-    });
   }
 
   void _startCooldownIndicator() {

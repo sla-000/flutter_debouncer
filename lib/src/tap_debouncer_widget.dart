@@ -7,7 +7,6 @@ class TapDebouncer extends StatefulWidget {
   const TapDebouncer({
     Key key,
     @required this.builder,
-    this.onTapCooldown,
     @required this.onTap,
   }) : super(key: key);
 
@@ -17,12 +16,10 @@ class TapDebouncer extends StatefulWidget {
   /// inner widgets
   final Widget Function(
     BuildContext context,
-    void Function() onTap,
+    Future<void> Function() onTap,
   ) builder;
 
-  /// Single tap cooldown
-  final Duration onTapCooldown;
-  final void Function() onTap;
+  final Future<void> Function() onTap;
 
   @override
   _DebouncerState createState() => _DebouncerState();
@@ -35,18 +32,7 @@ class _DebouncerState extends State<TapDebouncer> {
   void initState() {
     super.initState();
 
-    _tapDebouncerHandler =
-        TapDebouncerHandler(onTapCooldown: widget.onTapCooldown);
-  }
-
-  @override
-  void didUpdateWidget(TapDebouncer oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (widget.onTapCooldown != oldWidget.onTapCooldown) {
-      _tapDebouncerHandler =
-          TapDebouncerHandler(onTapCooldown: widget.onTapCooldown);
-    }
+    _tapDebouncerHandler = TapDebouncerHandler();
   }
 
   @override
@@ -58,18 +44,18 @@ class _DebouncerState extends State<TapDebouncer> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<TapDebounceState>(
-        stream: _tapDebouncerHandler.state,
-        builder:
-            (BuildContext context, AsyncSnapshot<TapDebounceState> snapshot) {
+    return StreamBuilder<bool>(
+        stream: _tapDebouncerHandler.busy,
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.hasError) {
-            throw StateError('TapDebounceState has error=${snapshot.error}');
+            throw StateError(
+                '_tapDebouncerHandler.busy has error=${snapshot.error}');
           }
 
-          if (snapshot.hasData && snapshot.data == TapDebounceState.waitTap) {
+          if (snapshot.hasData && snapshot.data == false) {
             return widget.builder(
               context,
-              () => _tapDebouncerHandler.onTap(widget.onTap),
+              () async => await _tapDebouncerHandler.onTap(widget.onTap),
             );
           }
 
