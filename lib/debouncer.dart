@@ -1,3 +1,3 @@
 library debouncer;
 
-export 'src/tap_debouncer_widget.dart';
+export 'src/debouncer_widget.dart';

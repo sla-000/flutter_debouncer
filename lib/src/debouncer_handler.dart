@@ -3,11 +3,7 @@ import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 
 /// Single tap debouncer
-class TapDebouncerHandler {
-  /// Pass this time to constructor if want to allow only one tap and
-  /// then disable button forever
-  static const Duration kNeverCooldown = Duration(days: 1000000000);
-
+class DebouncerHandler {
   final BehaviorSubject<bool> _busySubject =
       BehaviorSubject<bool>.seeded(false);
 
