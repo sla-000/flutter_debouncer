@@ -1,6 +1,7 @@
-# debouncer
+# Description
 
-Tap debounce simplifying widget
+Tap debounce simplifying widget. Wrap your button widget in TapDebounce widget and any taps will be 
+disabled while tap callback is in progress.
 
 ## Instruction
 
