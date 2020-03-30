@@ -27,9 +27,9 @@ Wrap this code to Debouncer and move RaisedButton onPressed contents to Debounce
 
 ```dart
 //...
-child: Debouncer(
+child: TapDebouncer(
   onTap: () async => await someLongOperation(), // your tap handler moved here
-  builder: (BuildContext context, DebouncerOnTap onTap) {
+  builder: (BuildContext context, TapDebouncerFunc onTap) {
     return RaisedButton(
       color: Colors.blue,
       disabledColor: Colors.grey,

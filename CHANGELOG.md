@@ -1,3 +1,7 @@
+## 0.0.6
+
+* Fix readme after some renamings
+
 ## 0.0.5
 
 * Fix readme image address
