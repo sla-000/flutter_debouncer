@@ -1,5 +1,5 @@
 name: debouncer
-description: Tap debounce simplifying widget and utils
+description: Tap debounce simplifying widget
 version: 0.0.1
 author: sla000 <ryabinin.v.v@gmail.com>
 homepage: https://github.com/sla-000/flutter_debouncer

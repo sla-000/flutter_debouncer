@@ -18,7 +18,7 @@ class Debouncer extends StatefulWidget {
 
   /// Builder function
   /// context is current context
-  /// onTap is Function to call
+  /// onTap is function to pass to XxxxButton or InkWell
   final Widget Function(
     BuildContext context,
     DebouncerOnTap onTap,
