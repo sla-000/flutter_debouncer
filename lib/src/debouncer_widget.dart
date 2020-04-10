@@ -4,7 +4,7 @@ import 'debouncer_handler.dart';
 
 typedef TapDebouncerFunc = Future<void> Function();
 
-/// Debouncer wrapper widget
+/// Tap debouncer widget
 class TapDebouncer extends StatefulWidget {
   const TapDebouncer({
     Key key,
@@ -19,11 +19,8 @@ class TapDebouncer extends StatefulWidget {
 
   /// Builder function
   /// context is current context
-  /// onTap is function to pass to XxxxButton or InkWell
-  final Widget Function(
-    BuildContext context,
-    TapDebouncerFunc onTap,
-  ) builder;
+  /// onTap is function to pass to SomeButton or InkWell
+  final Widget Function(BuildContext context, TapDebouncerFunc onTap) builder;
 
   /// Function to call on tap
   final Future<void> Function() onTap;
@@ -59,16 +56,22 @@ class _TapDebouncerState extends State<TapDebouncer> {
             return widget.builder(
               context,
               () async {
-                await _tapDebouncerHandler.onTap(widget.onTap);
-
-                if (widget.cooldown != null) {
-                  await Future<void>.delayed(widget.cooldown);
-                }
+                await _tapDebouncerHandler.onTap(() async {
+                  await _onTap();
+                });
               },
             );
           }
 
           return widget.builder(context, null);
         });
+  }
+
+  Future<void> _onTap() async {
+    await widget.onTap();
+
+    if (widget.cooldown != null) {
+      await Future<void>.delayed(widget.cooldown);
+    }
   }
 }

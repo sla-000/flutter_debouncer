@@ -14,13 +14,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  const MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -74,15 +74,11 @@ class _MyHomePageState extends State<MyHomePage> {
             bottom: 20,
             right: 20,
             child: TapDebouncer(
+              cooldown: const Duration(milliseconds: kCooldownShort_ms),
               onTap: () async {
                 _startCooldownIndicator(kCooldownShort_ms);
 
                 _incrementCounter();
-
-                await Future<void>.delayed(
-                  const Duration(milliseconds: kCooldownShort_ms),
-                  () {},
-                );
               },
               builder: (BuildContext context, TapDebouncerFunc onTap) {
                 return RaisedButton(
@@ -105,7 +101,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 await Future<void>.delayed(
                   const Duration(milliseconds: kCooldownLong_ms),
-                  () {},
                 );
               },
               builder: (BuildContext context, TapDebouncerFunc onTap) {
@@ -125,10 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () async {
                 _incrementCounter();
 
-                await Future<void>.delayed(
-                  TapDebouncer.kNeverCooldown,
-                  () {},
-                );
+                await Future<void>.delayed(TapDebouncer.kNeverCooldown);
               },
               builder: (BuildContext context, TapDebouncerFunc onTap) {
                 return RaisedButton(
@@ -144,23 +136,18 @@ class _MyHomePageState extends State<MyHomePage> {
             top: 20,
             right: 20,
             child: TapDebouncer(
+              cooldown: const Duration(milliseconds: kCooldownShort_ms),
               onTap: () async {
                 _startCooldownIndicator(kCooldownShort_ms * 2);
 
                 await Future<void>.delayed(
                   const Duration(milliseconds: kCooldownShort_ms),
-                  () {},
                 );
 
                 try {
                   throw Exception('Some error');
                 } on Exception catch (error) {
-                  debugPrint('$error');
-
-                  await Future<void>.delayed(
-                    const Duration(milliseconds: kCooldownShort_ms),
-                    () {},
-                  );
+                  debugPrint('Caught $error');
                 }
               },
               builder: (BuildContext context, TapDebouncerFunc onTap) {
