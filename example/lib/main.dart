@@ -135,27 +135,35 @@ class _MyHomePageState extends State<MyHomePage> {
           Positioned(
             top: 20,
             right: 20,
-            child: TapDebouncer(
-              cooldown: const Duration(milliseconds: kCooldownShort_ms),
-              onTap: () async {
-                _startCooldownIndicator(kCooldownShort_ms * 2);
+            child: Builder(
+              builder: (BuildContext context) {
+                return TapDebouncer(
+                  cooldown: const Duration(milliseconds: kCooldownShort_ms),
+                  onTap: () async {
+                    _startCooldownIndicator(kCooldownShort_ms * 2);
 
-                await Future<void>.delayed(
-                  const Duration(milliseconds: kCooldownShort_ms),
-                );
+                    await Future<void>.delayed(
+                      const Duration(milliseconds: kCooldownShort_ms),
+                    );
 
-                try {
-                  throw Exception('Some error');
-                } on Exception catch (error) {
-                  debugPrint('Caught $error');
-                }
-              },
-              builder: (BuildContext context, TapDebouncerFunc onTap) {
-                return RaisedButton(
-                  color: Colors.red,
-                  disabledColor: Colors.grey,
-                  onPressed: onTap,
-                  child: const Text('Faulty'),
+                    try {
+                      throw Exception('Some error');
+                    } on Exception catch (error) {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Colors.red.withAlpha(0x80),
+                        content: Text('Caught $error'),
+                        duration: const Duration(milliseconds: 500),
+                      ));
+                    }
+                  },
+                  builder: (BuildContext context, TapDebouncerFunc onTap) {
+                    return RaisedButton(
+                      color: Colors.red,
+                      disabledColor: Colors.grey,
+                      onPressed: onTap,
+                      child: const Text('Faulty'),
+                    );
+                  },
                 );
               },
             ),
