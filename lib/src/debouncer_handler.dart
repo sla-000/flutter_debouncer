@@ -1,34 +1,35 @@
 import 'dart:async';
 
-import 'package:rxdart/rxdart.dart';
-
 /// Single tap debouncer
 class DebouncerHandler {
-  final BehaviorSubject<bool> _busySubject =
-      BehaviorSubject<bool>.seeded(false);
+  DebouncerHandler() : _busyController = StreamController<bool>() {
+    _busyController.add(false);
+  }
 
-  /// State stream
-  Stream<void> get busy => _busySubject.stream;
+  final StreamController<bool> _busyController;
+
+  /// Busy state stream
+  Stream<void> get busy => _busyController.stream;
 
   /// Dispose resources
   void dispose() {
-    _busySubject.close();
+    _busyController.close();
   }
 
   /// Process onTap
   /// returns true if tap is processed and false if skipped
   Future<void> onTap(Future<void> Function() onTap) async {
     try {
-      if (!_busySubject.isClosed) {
-        _busySubject.add(true);
+      if (!_busyController.isClosed) {
+        _busyController.add(true);
       }
 
       await onTap();
     } on Exception catch (_) {
       rethrow;
     } finally {
-      if (!_busySubject.isClosed) {
-        _busySubject.add(false);
+      if (!_busyController.isClosed) {
+        _busyController.add(false);
       }
     }
   }
