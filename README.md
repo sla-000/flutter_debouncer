@@ -50,15 +50,42 @@ called.
 ```dart
 //...
 onTap: () async {
-    someOperation();
+    await someOperation();
     
-    await Future<void>.delayed(
-      const Duration(milliseconds: 1000),
-      () {},
-    );
+    await Future<void>.delayed(const Duration(milliseconds: 1000));
 },
 //...
 ```
+
+You can fill optional cooldown field with some Duration and avoid adding of Future.delayed at 
+the end of onTap callback, this will be done automatically:
+
+```dart
+//...
+child: TapDebouncer(
+  cooldown: const Duration(milliseconds: 1000),
+  onTap: () async => await someLongOperation(), // your tap handler moved here
+  builder: (BuildContext context, TapDebouncerFunc onTap) {
+    return RaisedButton(
+      color: Colors.blue,
+      disabledColor: Colors.grey,
+      onPressed: onTap,  // It is just onTap from builder callback
+      child: const Text('Short'),
+    );
+  },
+),
+//...
+```
+
+Then your onTap could be changed to this:
+
+```dart
+//...
+onTap: () async => await someOperation(),
+//...
+```
+
+If someOperation will raise exception cooldown delay will also work, after exception.
 
 See example application for details:
 
