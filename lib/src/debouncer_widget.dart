@@ -10,6 +10,7 @@ class TapDebouncer extends StatefulWidget {
     Key key,
     @required this.builder,
     @required this.onTap,
+    this.cooldown,
   }) : super(key: key);
 
   /// Pass this time to constructor if want to allow only one tap and
@@ -26,6 +27,9 @@ class TapDebouncer extends StatefulWidget {
 
   /// Function to call on tap
   final Future<void> Function() onTap;
+
+  /// Cooldown duration - delay after onTap executed (successfully or not)
+  final Duration cooldown;
 
   @override
   _TapDebouncerState createState() => _TapDebouncerState();
@@ -54,7 +58,13 @@ class _TapDebouncerState extends State<TapDebouncer> {
           if (snapshot.hasData && snapshot.data == false) {
             return widget.builder(
               context,
-              () async => await _tapDebouncerHandler.onTap(widget.onTap),
+              () async {
+                await _tapDebouncerHandler.onTap(widget.onTap);
+
+                if (widget.cooldown != null) {
+                  await Future<void>.delayed(widget.cooldown);
+                }
+              },
             );
           }
 
