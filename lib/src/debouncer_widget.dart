@@ -9,7 +9,7 @@ class TapDebouncer extends StatefulWidget {
   const TapDebouncer({
     Key key,
     @required this.builder,
-    @required this.onTap,
+    this.onTap,
     this.cooldown,
   }) : super(key: key);
 
@@ -55,23 +55,21 @@ class _TapDebouncerState extends State<TapDebouncer> {
           if (snapshot.hasData && snapshot.data == false) {
             return widget.builder(
               context,
-              () async {
-                await _tapDebouncerHandler.onTap(() async {
-                  await _onTap();
-                });
-              },
+              widget.onTap == null
+                  ? null
+                  : () async {
+                      await _tapDebouncerHandler.onTap(() async {
+                        await widget.onTap();
+
+                        if (widget.cooldown != null) {
+                          await Future<void>.delayed(widget.cooldown);
+                        }
+                      });
+                    },
             );
           }
 
           return widget.builder(context, null);
         });
-  }
-
-  Future<void> _onTap() async {
-    await widget.onTap();
-
-    if (widget.cooldown != null) {
-      await Future<void>.delayed(widget.cooldown);
-    }
   }
 }
