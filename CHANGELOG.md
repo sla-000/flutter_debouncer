@@ -1,3 +1,8 @@
+## 0.0.8
+
+* Fix exception if onTap function is null
+
+
 ## 0.0.7
 
 * Add cooldown
