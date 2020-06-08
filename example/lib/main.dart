@@ -168,6 +168,24 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
           ),
+          Positioned(
+            bottom: 20,
+            left: 80,
+            right: 80,
+            child: Center(
+              child: TapDebouncer(
+                onTap: null,
+                builder: (BuildContext context, TapDebouncerFunc onTap) {
+                  return RaisedButton(
+                    color: Colors.black26,
+                    disabledColor: Colors.black12,
+                    onPressed: onTap,
+                    child: const Text('Null'),
+                  );
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );
