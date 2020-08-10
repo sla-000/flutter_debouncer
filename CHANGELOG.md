@@ -1,3 +1,8 @@
+## 1.0.0
+
+* Add optional field waitBuilder to show special widget while wait tap processing
+
+
 ## 0.0.8
 
 * Fix exception if onTap function is null
