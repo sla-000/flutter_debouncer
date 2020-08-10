@@ -3,7 +3,9 @@
 Tap debounce simplifying widget. Wrap your button widget in TapDebounce widget and any taps will be 
 disabled while tap callback is in progress.
 
-## Instruction
+## Manual
+
+### Initial code
 
 Assume your code with some button look like this:
 
@@ -22,6 +24,8 @@ and you do not want user to be able to press the button again several times and 
 someLongOperation functions. Example is a Navigator pop function - it can take a few hundred of 
 millis to navigate and user can press the button several times, and that will lead to undesired pop 
 several screens back instead of one.
+
+### Wrap code to TapDebouncer
 
 Wrap this code to Debouncer and move RaisedButton onPressed contents to Debouncer onTap:
 
@@ -43,6 +47,8 @@ child: TapDebouncer(
 
 Debouncer will disable the RaisedButton by setting onPressed to null while onTap is being executed. 
 
+### Add delay after tap process
+
 You can add optional delay to be sure that the button is disabled some time after someOperation is 
 called.
 
@@ -56,6 +62,8 @@ onTap: () async {
 },
 //...
 ```
+
+### Use cooldown instead of delay
 
 You can fill optional cooldown field with some Duration and avoid adding of Future.delayed at 
 the end of onTap callback, this will be done automatically:
@@ -85,7 +93,51 @@ onTap: () async => await someOperation(),
 //...
 ```
 
+### Cooldown behavior with exception
+
 If someOperation will raise exception cooldown delay will also work, after exception.
+
+### Change look of busy widget (waiting for tap complete)
+
+You can inspect value of onTap and change look of your widget:
+
+```dart
+//...
+builder: (BuildContext context, TapDebouncerFunc onTap) {
+  return RaisedButton(
+    color: Colors.blue,
+    onPressed: onTap,
+    // variant with manual test onTap for null in builder
+    child: onTap == null
+        ? const Text('Wait...')
+        : const Text('Short'),
+  );
+},
+//...
+```
+
+Also you can use waitBuilder method to build new busy widget:
+
+```dart
+//...
+builder: (BuildContext context, TapDebouncerFunc onTap) {
+//...
+},
+// variant with using waitBuilder instead of test onTap for null
+waitBuilder: (BuildContext context, Widget child) {
+  return Stack(
+    children: <Widget>[
+      child,
+      const Center(child: CircularProgressIndicator()),
+    ],
+  );
+},
+//...
+```
+
+waitBuilder will return original widget (built with onTap == null) as child
+
+## Example
 
 See example application for details:
 
