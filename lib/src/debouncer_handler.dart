@@ -9,7 +9,7 @@ class DebouncerHandler {
   final StreamController<bool> _busyController;
 
   /// Busy state stream
-  Stream<void> get busy => _busyController.stream;
+  Stream<bool> get busy => _busyController.stream;
 
   /// Dispose resources
   void dispose() {
