@@ -1,3 +1,8 @@
+## 1.0.1
+* Fix busy stream type
+* Prepare to null safety
+
+
 ## 1.0.0
 
 * Add optional field waitBuilder to show special widget while wait tap processing
