@@ -80,8 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   _incrementCounter();
                 },
                 builder: (BuildContext context, TapDebouncerFunc onTap) {
-                  return RaisedButton(
-                    color: Colors.blue,
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.blue),
                     onPressed: onTap,
                     // variant with manual test onTap for null in builder
                     child: onTap == null
@@ -109,8 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 },
                 builder: (BuildContext context, TapDebouncerFunc onTap) {
-                  return RaisedButton(
-                    color: Colors.green,
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.green),
                     onPressed: onTap,
                     child: const Center(child: Text('Long')),
                   );
@@ -139,8 +139,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   _incrementCounter();
                 },
                 builder: (BuildContext context, TapDebouncerFunc onTap) {
-                  return RaisedButton(
-                    color: Colors.pink,
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.pink),
                     onPressed: onTap,
                     child: const Text('OneShot'),
                   );
@@ -169,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       try {
                         throw Exception('Some error');
                       } on Exception catch (error) {
-                        Scaffold.of(context).showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor: Colors.red.withAlpha(0x80),
                           content: Text('Caught $error'),
                           duration: const Duration(milliseconds: 500),
@@ -177,8 +177,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       }
                     },
                     builder: (BuildContext context, TapDebouncerFunc onTap) {
-                      return RaisedButton(
-                        color: Colors.red,
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.red),
                         onPressed: onTap,
                         child: Center(
                             child: onTap == null
@@ -202,8 +202,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: TapDebouncer(
                   onTap: null,
                   builder: (BuildContext context, TapDebouncerFunc onTap) {
-                    return RaisedButton(
-                      color: Colors.black26,
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Colors.black26),
                       onPressed: onTap,
                       child: const Text('Null'),
                     );
@@ -217,25 +217,25 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void _startCooldownIndicator(int time_ms) {
+  void _startCooldownIndicator(int timeMs) {
     _cooldownStarted = DateTime.now().millisecondsSinceEpoch;
-    _updateCooldown(time_ms);
+    _updateCooldown(timeMs);
   }
 
-  void _updateCooldown(int time_ms) {
+  void _updateCooldown(int timeMs) {
     final int current = DateTime.now().millisecondsSinceEpoch;
     int delta = current - _cooldownStarted;
-    if (delta > time_ms) {
-      delta = time_ms;
+    if (delta > timeMs) {
+      delta = timeMs;
     }
 
     setState(() {
-      _cooldown = delta.roundToDouble() / time_ms;
+      _cooldown = delta.roundToDouble() / timeMs;
     });
 
     Future<void>(() {
-      if (delta < time_ms) {
-        _updateCooldown(time_ms);
+      if (delta < timeMs) {
+        _updateCooldown(timeMs);
       } else {
         setState(() {
           _cooldown = 0.0;
