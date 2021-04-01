@@ -2,9 +2,7 @@ import 'dart:async';
 
 /// Single tap debouncer
 class DebouncerHandler {
-  DebouncerHandler() : _busyController = StreamController<bool>() {
-    _busyController.add(false);
-  }
+  DebouncerHandler() : _busyController = StreamController<bool>()..add(false);
 
   final StreamController<bool> _busyController;
 
@@ -17,7 +15,6 @@ class DebouncerHandler {
   }
 
   /// Process onTap
-  /// returns true if tap is processed and false if skipped
   Future<void> onTap(Future<void> Function() onTap) async {
     try {
       if (!_busyController.isClosed) {

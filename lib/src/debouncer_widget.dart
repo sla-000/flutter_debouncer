@@ -54,24 +54,27 @@ class _TapDebouncerState extends State<TapDebouncer> {
       stream: _tapDebouncerHandler.busyStream,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
         if (snapshot.hasError) {
-          throw StateError('_tapDebouncerHandler.busy has error=${snapshot.error}');
+          throw StateError(
+              '_tapDebouncerHandler.busy has error=${snapshot.error}');
         }
 
-        if (snapshot.hasData && snapshot.data! == false) {
+        final bool isBusy = snapshot.data ?? false;
+
+        if (snapshot.hasData && !isBusy) {
           return widget.builder(
             context,
             widget.onTap == null
                 ? null
                 : () async {
-                    await _tapDebouncerHandler.onTap(() async {
-                      if (widget.onTap != null) {
+                    await _tapDebouncerHandler.onTap(
+                      () async {
                         await widget.onTap!();
-                      }
 
-                      if (widget.cooldown != null) {
-                        await Future<void>.delayed(widget.cooldown!);
-                      }
-                    });
+                        if (widget.cooldown != null) {
+                          await Future<void>.delayed(widget.cooldown!);
+                        }
+                      },
+                    );
                   },
           );
         }
