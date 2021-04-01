@@ -1,3 +1,10 @@
+## 2.0.0
+* Migrate to dart 2.12.0 with null-safety
+* Fix issue #3 and update example thanks to Lukas Kurz
+* Add macos port to example
+* Small fixes
+
+
 ## 1.0.1
 * Fix busy stream type
 * Prepare to null safety
