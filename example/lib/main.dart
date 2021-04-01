@@ -4,9 +4,13 @@ import 'package:tap_debouncer/tap_debouncer.dart';
 const int kCooldownLong_ms = 3000;
 const int kCooldownShort_ms = 1200;
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({
+    Key key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +24,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key key, this.title}) : super(key: key);
+  const MyHomePage({
+    Key key,
+    this.title,
+  }) : super(key: key);
 
   final String title;
 
@@ -79,11 +86,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   _incrementCounter();
                 },
-                builder: (BuildContext context, TapDebouncerFunc onTap) {
+                builder: (_, TapDebouncerFunc onTap) {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.blue),
                     onPressed: onTap,
-                    // variant with manual test onTap for null in builder
+                    // alternative with manual test onTap for null in builder
                     child: onTap == null
                         ? const Text('Wait...')
                         : const Text('Short'),
@@ -108,15 +115,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     const Duration(milliseconds: kCooldownLong_ms),
                   );
                 },
-                builder: (BuildContext context, TapDebouncerFunc onTap) {
+                builder: (_, TapDebouncerFunc onTap) {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.green),
                     onPressed: onTap,
                     child: const Center(child: Text('Long')),
                   );
                 },
-                // variant with using waitBuilder instead of test onTap for null
-                waitBuilder: (BuildContext context, Widget child) {
+                // alternative with using waitBuilder instead of test onTap for null
+                waitBuilder: (_, Widget child) {
                   return Stack(
                     children: <Widget>[
                       child,
@@ -138,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () async {
                   _incrementCounter();
                 },
-                builder: (BuildContext context, TapDebouncerFunc onTap) {
+                builder: (_, TapDebouncerFunc onTap) {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.pink),
                     onPressed: onTap,
@@ -176,7 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ));
                       }
                     },
-                    builder: (BuildContext context, TapDebouncerFunc onTap) {
+                    builder: (_, TapDebouncerFunc onTap) {
                       return ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.red),
                         onPressed: onTap,
@@ -201,7 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 80,
                 child: TapDebouncer(
                   onTap: null,
-                  builder: (BuildContext context, TapDebouncerFunc onTap) {
+                  builder: (_, TapDebouncerFunc onTap) {
                     return ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: Colors.black26),
                       onPressed: onTap,
