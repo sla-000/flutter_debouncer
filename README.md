@@ -33,7 +33,7 @@ Wrap this code to Debouncer and move RaisedButton onPressed contents to Debounce
 //...
 child: TapDebouncer(
   onTap: () async => await someLongOperation(), // your tap handler moved here
-  builder: (BuildContext context, TapDebouncerFunc onTap) {
+  builder: (BuildContext context, TapDebouncerFunc? onTap) {
     return RaisedButton(
       color: Colors.blue,
       disabledColor: Colors.grey,
@@ -73,7 +73,7 @@ the end of onTap callback, this will be done automatically:
 child: TapDebouncer(
   cooldown: const Duration(milliseconds: 1000),
   onTap: () async => await someLongOperation(), // your tap handler moved here
-  builder: (BuildContext context, TapDebouncerFunc onTap) {
+  builder: (BuildContext context, TapDebouncerFunc? onTap) {
     return RaisedButton(
       color: Colors.blue,
       disabledColor: Colors.grey,
@@ -103,7 +103,7 @@ You can inspect value of onTap and change look of your widget:
 
 ```dart
 //...
-builder: (BuildContext context, TapDebouncerFunc onTap) {
+builder: (BuildContext context, TapDebouncerFunc? onTap) {
   return RaisedButton(
     color: Colors.blue,
     onPressed: onTap,
@@ -120,7 +120,7 @@ Also you can use waitBuilder method to build new busy widget:
 
 ```dart
 //...
-builder: (BuildContext context, TapDebouncerFunc onTap) {
+builder: (BuildContext context, TapDebouncerFunc? onTap) {
 //...
 },
 // variant with using waitBuilder instead of test onTap for null
