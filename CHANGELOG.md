@@ -1,3 +1,7 @@
+## 2.0.1
+* Upgrade example to null-safety
+
+
 ## 2.0.0
 * Migrate to dart 2.12.0 with null-safety
 * Fix issue #3 and update example thanks to Lukas Kurz
@@ -46,4 +50,3 @@
 ## 0.0.3
 
 * First public release
-

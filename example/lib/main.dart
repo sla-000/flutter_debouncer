@@ -4,11 +4,13 @@ import 'package:tap_debouncer/tap_debouncer.dart';
 const int kCooldownLong_ms = 3000;
 const int kCooldownShort_ms = 1200;
 
+const double kButtonSize = 100;
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -25,8 +27,8 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
-    Key key,
-    this.title,
+    Key? key,
+    required this.title,
   }) : super(key: key);
 
   final String title;
@@ -66,8 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(height: 24),
                 const Text('Cooldown:'),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                   child: LinearProgressIndicator(value: _cooldown),
                 ),
               ],
@@ -77,8 +78,8 @@ class _MyHomePageState extends State<MyHomePage> {
             bottom: 20,
             right: 20,
             child: SizedBox(
-              width: 80,
-              height: 80,
+              width: kButtonSize,
+              height: kButtonSize,
               child: TapDebouncer(
                 cooldown: const Duration(milliseconds: kCooldownShort_ms),
                 onTap: () async {
@@ -86,14 +87,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   _incrementCounter();
                 },
-                builder: (_, TapDebouncerFunc onTap) {
+                builder: (_, TapDebouncerFunc? onTap) {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.blue),
                     onPressed: onTap,
                     // alternative with manual test onTap for null in builder
-                    child: onTap == null
-                        ? const Text('Wait...')
-                        : const Text('Short'),
+                    child: onTap == null ? const Text('Wait...') : const Text('Short'),
                   );
                 },
               ),
@@ -103,8 +102,8 @@ class _MyHomePageState extends State<MyHomePage> {
             bottom: 20,
             left: 20,
             child: SizedBox(
-              width: 80,
-              height: 80,
+              width: kButtonSize,
+              height: kButtonSize,
               child: TapDebouncer(
                 onTap: () async {
                   _startCooldownIndicator(kCooldownLong_ms);
@@ -115,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     const Duration(milliseconds: kCooldownLong_ms),
                   );
                 },
-                builder: (_, TapDebouncerFunc onTap) {
+                builder: (_, TapDebouncerFunc? onTap) {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.green),
                     onPressed: onTap,
@@ -138,14 +137,14 @@ class _MyHomePageState extends State<MyHomePage> {
             top: 20,
             left: 20,
             child: SizedBox(
-              width: 80,
-              height: 80,
+              width: kButtonSize,
+              height: kButtonSize,
               child: TapDebouncer(
                 cooldown: TapDebouncer.kNeverCooldown,
                 onTap: () async {
                   _incrementCounter();
                 },
-                builder: (_, TapDebouncerFunc onTap) {
+                builder: (_, TapDebouncerFunc? onTap) {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.pink),
                     onPressed: onTap,
@@ -162,8 +161,8 @@ class _MyHomePageState extends State<MyHomePage> {
               // Builder is needed just to get context for showSnackBar
               builder: (BuildContext context) {
                 return SizedBox(
-                  width: 80,
-                  height: 80,
+                  width: kButtonSize,
+                  height: kButtonSize,
                   child: TapDebouncer(
                     cooldown: const Duration(milliseconds: kCooldownShort_ms),
                     onTap: () async {
@@ -183,14 +182,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ));
                       }
                     },
-                    builder: (_, TapDebouncerFunc onTap) {
+                    builder: (_, TapDebouncerFunc? onTap) {
                       return ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.red),
                         onPressed: onTap,
-                        child: Center(
-                            child: onTap == null
-                                ? const Text('Wait\nfail...')
-                                : const Text('Faulty')),
+                        child: Center(child: onTap == null ? const Text('Wait\nfail...') : const Text('Faulty')),
                       );
                     },
                   ),
@@ -204,11 +200,11 @@ class _MyHomePageState extends State<MyHomePage> {
             right: 100,
             child: Center(
               child: SizedBox(
-                width: 80,
-                height: 80,
+                width: kButtonSize,
+                height: kButtonSize,
                 child: TapDebouncer(
                   onTap: null,
-                  builder: (_, TapDebouncerFunc onTap) {
+                  builder: (_, TapDebouncerFunc? onTap) {
                     return ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: Colors.black26),
                       onPressed: onTap,
