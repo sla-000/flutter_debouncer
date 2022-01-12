@@ -60,7 +60,7 @@ class _TapDebouncerState extends State<TapDebouncer> {
 
         final bool isBusy = snapshot.data ?? false;
 
-        if (snapshot.hasData && !isBusy) {
+        if (!snapshot.hasData || !isBusy) {
           return widget.builder(
             context,
             widget.onTap == null
