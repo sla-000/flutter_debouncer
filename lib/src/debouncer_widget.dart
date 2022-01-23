@@ -51,16 +51,16 @@ class _TapDebouncerState extends State<TapDebouncer> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<bool>(
+      initialData: false,
       stream: _tapDebouncerHandler.busyStream,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
         if (snapshot.hasError) {
-          throw StateError(
-              '_tapDebouncerHandler.busy has error=${snapshot.error}');
+          throw StateError('_tapDebouncerHandler.busy has error=${snapshot.error}');
         }
 
-        final bool isBusy = snapshot.data ?? false;
+        final bool isBusy = snapshot.data!;
 
-        if (snapshot.hasData && !isBusy) {
+        if (!isBusy) {
           return widget.builder(
             context,
             widget.onTap == null
