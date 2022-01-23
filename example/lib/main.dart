@@ -95,7 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: onTap == null ? const Text('Wait...') : const Text('Short'),
                   );
                 },
-                key: const Key('Short'),
               ),
             ),
           ),
@@ -131,7 +130,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   );
                 },
-                key: const Key('Long'),
               ),
             ),
           ),
@@ -153,7 +151,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: const Text('OneShot'),
                   );
                 },
-                key: const Key('OneShot'),
               ),
             ),
           ),
@@ -192,7 +189,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Center(child: onTap == null ? const Text('Wait\nfail...') : const Text('Faulty')),
                       );
                     },
-                    key: const Key('Faulty'),
                   ),
                 );
               },
@@ -215,7 +211,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: const Text('Null'),
                     );
                   },
-                  key: const Key('Null'),
                 ),
               ),
             ),
