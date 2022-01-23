@@ -61,10 +61,6 @@ class _TapDebouncerState extends State<TapDebouncer> {
         final bool isBusy = snapshot.data!;
 
         if (!isBusy) {
-          if (widget.key == const Key('Short')) {
-            print('@@@@@@@@@ not busy');
-          }
-
           return widget.builder(
             context,
             widget.onTap == null
@@ -86,14 +82,8 @@ class _TapDebouncerState extends State<TapDebouncer> {
         final Widget disabledChild = widget.builder(context, null);
 
         if (widget.waitBuilder == null) {
-          if (widget.key == const Key('Short')) {
-            print('@@@@@@@@@ disabled');
-          }
           return disabledChild;
         } else {
-          if (widget.key == const Key('Short')) {
-            print('@@@@@@@@@ wait');
-          }
           return widget.waitBuilder!(context, disabledChild);
         }
       },
