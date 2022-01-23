@@ -1,3 +1,7 @@
+## 2.0.2
+* Fix "disabled" state of widget for a short time at first appearance, thanks to sharp eye and effort of Maksim Zakharov
+
+
 ## 2.0.1
 * Upgrade example to null-safety
 
