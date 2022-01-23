@@ -51,16 +51,20 @@ class _TapDebouncerState extends State<TapDebouncer> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<bool>(
+      initialData: false,
       stream: _tapDebouncerHandler.busyStream,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
         if (snapshot.hasError) {
-          throw StateError(
-              '_tapDebouncerHandler.busy has error=${snapshot.error}');
+          throw StateError('_tapDebouncerHandler.busy has error=${snapshot.error}');
         }
 
-        final bool isBusy = snapshot.data ?? false;
+        final bool isBusy = snapshot.data!;
 
-        if (snapshot.hasData && !isBusy) {
+        if (!isBusy) {
+          if (widget.key == const Key('Short')) {
+            print('@@@@@@@@@ not busy');
+          }
+
           return widget.builder(
             context,
             widget.onTap == null
@@ -82,8 +86,14 @@ class _TapDebouncerState extends State<TapDebouncer> {
         final Widget disabledChild = widget.builder(context, null);
 
         if (widget.waitBuilder == null) {
+          if (widget.key == const Key('Short')) {
+            print('@@@@@@@@@ disabled');
+          }
           return disabledChild;
         } else {
+          if (widget.key == const Key('Short')) {
+            print('@@@@@@@@@ wait');
+          }
           return widget.waitBuilder!(context, disabledChild);
         }
       },
