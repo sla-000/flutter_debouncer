@@ -28,10 +28,14 @@
 .packages
 .pub-cache/
 .pub/
-/build/
+build/
 
-# Web related
-lib/generated_plugin_registrant.dart
+pubspec.lock
+example/pubspec.lock
 
-# Exceptions to above rules.
-!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+example/android
+example/ios
+example/linux
+example/macos
+example/web
+example/windows
