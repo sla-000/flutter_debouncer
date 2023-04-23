@@ -1,0 +1,22 @@
+name: tap_debouncer
+
+packages:
+  - '*'
+  - '**'
+
+scripts:
+  format:
+    description: "Format"
+    run: melos exec -- dart format .
+
+  analyze:
+    description: "Analyze"
+    run: melos exec -c 1 -- dart analyze
+
+  test:
+    description: "Test"
+    run: melos exec -c 1 -- dart test .
+
+  check:
+    description: "Analyze and test"
+    run: melos run analyze && melos run test

@@ -1,18 +1,17 @@
 import 'package:flutter/widgets.dart';
-
-import 'debouncer_handler.dart';
+import 'package:tap_debouncer/src/debouncer_handler.dart';
 
 typedef TapDebouncerFunc = Future<void> Function();
 
 /// Tap debouncer widget
 class TapDebouncer extends StatefulWidget {
   const TapDebouncer({
-    Key? key,
+    super.key,
     required this.builder,
     this.waitBuilder,
     this.onTap,
     this.cooldown,
-  }) : super(key: key);
+  });
 
   /// Pass this time to constructor if want to allow only one tap and
   /// then disable button forever
@@ -35,7 +34,7 @@ class TapDebouncer extends StatefulWidget {
   final Duration? cooldown;
 
   @override
-  _TapDebouncerState createState() => _TapDebouncerState();
+  State<TapDebouncer> createState() => _TapDebouncerState();
 }
 
 class _TapDebouncerState extends State<TapDebouncer> {
@@ -49,44 +48,44 @@ class _TapDebouncerState extends State<TapDebouncer> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<bool>(
-      initialData: false,
-      stream: _tapDebouncerHandler.busyStream,
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (snapshot.hasError) {
-          throw StateError('_tapDebouncerHandler.busy has error=${snapshot.error}');
-        }
+  Widget build(BuildContext context) => StreamBuilder<bool>(
+        initialData: false,
+        stream: _tapDebouncerHandler.busyStream,
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.hasError) {
+            throw StateError(
+              '_tapDebouncerHandler.busy has error=${snapshot.error}',
+            );
+          }
 
-        final bool isBusy = snapshot.data!;
+          final isBusy = snapshot.data!;
 
-        if (!isBusy) {
-          return widget.builder(
-            context,
-            widget.onTap == null
-                ? null
-                : () async {
-                    await _tapDebouncerHandler.onTap(
-                      () async {
-                        await widget.onTap!();
+          if (!isBusy) {
+            return widget.builder(
+              context,
+              widget.onTap == null
+                  ? null
+                  : () async {
+                      await _tapDebouncerHandler.onTap(
+                        () async {
+                          await widget.onTap!();
 
-                        if (widget.cooldown != null) {
-                          await Future<void>.delayed(widget.cooldown!);
-                        }
-                      },
-                    );
-                  },
-          );
-        }
+                          if (widget.cooldown != null) {
+                            await Future<void>.delayed(widget.cooldown!);
+                          }
+                        },
+                      );
+                    },
+            );
+          }
 
-        final Widget disabledChild = widget.builder(context, null);
+          final disabledChild = widget.builder(context, null);
 
-        if (widget.waitBuilder == null) {
-          return disabledChild;
-        } else {
-          return widget.waitBuilder!(context, disabledChild);
-        }
-      },
-    );
-  }
+          if (widget.waitBuilder == null) {
+            return disabledChild;
+          } else {
+            return widget.waitBuilder!(context, disabledChild);
+          }
+        },
+      );
 }
