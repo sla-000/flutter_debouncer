@@ -7,16 +7,30 @@ packages:
 scripts:
   format:
     description: "Format"
-    run: melos exec -- dart format .
+    run: |
+      melos exec -- dart format .
 
   analyze:
     description: "Analyze"
-    run: melos exec -c 1 -- dart analyze
+    run: |
+      melos exec -c 1 -- dart analyze
+
+  _format:
+    description: "Check format"
+    run: |
+      melos exec -c 1 -- flutter format -n --set-exit-if-changed .
 
   test:
     description: "Test"
-    run: melos exec -c 1 -- dart test .
+    run: |
+      melos exec -c 1 -- dart test .
 
   check:
-    description: "Analyze and test"
-    run: melos run analyze && melos run test
+    description: "Check format, analyze and test"
+    run: |
+      melos run _format && melos run analyze && melos run test
+
+  upgrade:
+    description: "Upgrade"
+    run: |
+      melos exec -c 1 -- flutter pub upgrade --major-versions
