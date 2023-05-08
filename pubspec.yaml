@@ -5,7 +5,7 @@ homepage: https://github.com/sla-000/flutter_debouncer
 repository: https://github.com/sla-000/flutter_debouncer
 
 environment:
-  flutter: ^3.7.0
+  flutter: ">=3.7.0"
   sdk: ">=2.19.0 <3.0.0"
 
 dependencies:
