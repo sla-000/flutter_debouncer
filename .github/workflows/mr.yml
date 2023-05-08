@@ -1,0 +1,26 @@
+name: analyze & test
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  test:
+    name: Check the source code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.0'
+          channel: 'stable'
+      - name: Flutter version
+        run: flutter --version
+      - name: Init
+        run: flutter pub global activate melos 3.0.1
+      - name: Bootstrap
+        run: flutter pub global run melos bs
+      - name: Check format, analyze and test
+        run: flutter pub global run melos run check
