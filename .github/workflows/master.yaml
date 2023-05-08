@@ -34,5 +34,6 @@ jobs:
           branch: master
           empty: true
           tags: true
+          force: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
           
