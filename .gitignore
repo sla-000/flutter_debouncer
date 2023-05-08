@@ -31,11 +31,3 @@
 build/
 
 pubspec.lock
-example/pubspec.lock
-
-example/android/
-example/ios/
-example/linux/
-example/macos/
-example/web/
-example/windows/
