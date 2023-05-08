@@ -11,7 +11,7 @@ class DebouncerHandler {
 
   /// Dispose resources
   void dispose() {
-    _busyController.close();
+    unawaited(_busyController.close());
   }
 
   /// Process onTap

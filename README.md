@@ -1,3 +1,10 @@
+<a href="https://github.com/sla-000/flutter_debouncer/actions">
+<img src="https://github.com/sla-000/flutter_debouncer/workflows/check/badge.svg" alt="Analyze and tests status">
+</a>
+<a href="https://opensource.org/licenses/MIT">
+<img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"/>
+</a>
+
 # Description
 
 Tap debounce simplifying widget. Wrap your button widget in TapDebounce widget and any taps will be 

@@ -1,9 +1,8 @@
 name: Check master and upgrade version
 on:
   push:
-#   pull_request:
-#     branches:
-#       - main
+    branches:
+      - main
 jobs:
   test:
     name: Check the source code
