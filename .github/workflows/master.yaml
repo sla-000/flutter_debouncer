@@ -2,7 +2,7 @@ name: Check master and upgrade version
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   test:
     name: Check the source code
