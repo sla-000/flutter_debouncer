@@ -1,3 +1,36 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2023-05-08
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`example` - `v3.0.1`](#example---v301)
+
+---
+
+#### `example` - `v3.0.1`
+
+ - **REFACTOR**: -.
+ - **REFACTOR**: WTF.
+ - **REFACTOR**: WTF.
+ - **REFACTOR**: WTF.
+ - **REFACTOR**: Have no idea.
+ - **REFACTOR**: Update Flutter version. Add melos. Add new linter rules. Fix lint errors.
+ - **REFACTOR**: Remove platform-dependand files.
+ - **FIX**: Check CI.
+ - **FIX**: Fix flutter version.
+
 ## 2.0.2
 * Fix "disabled" state of widget for a short time at first appearance, thanks to sharp eye and effort of Maksim Zakharov
 
