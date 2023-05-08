@@ -31,6 +31,7 @@ jobs:
       - name: Commit & Push changes
         uses: actions-js/push@v1.4
         with:
+          branch: master
           empty: true
           tags: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
