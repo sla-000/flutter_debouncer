@@ -1,3 +1,2 @@
 - Add tests
-- Add CI/CD checks
 - Add analyze and test badges to readme
