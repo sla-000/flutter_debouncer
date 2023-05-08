@@ -1,8 +1,6 @@
-name: analyze & test
+name: Check MR
 on:
-  pull_request:
-    branches:
-      - master
+  push:
 jobs:
   test:
     name: Check the source code
