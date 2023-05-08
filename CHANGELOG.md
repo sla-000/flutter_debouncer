@@ -1,3 +1,58 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2023-05-08
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`tap_debouncer` - `v2.0.4`](#tap_debouncer---v204)
+
+---
+
+#### `tap_debouncer` - `v2.0.4`
+
+ - **REFACTOR**: -.
+ - **REFACTOR**: WTF.
+ - **REFACTOR**: WTF.
+ - **REFACTOR**: WTF.
+ - **REFACTOR**: WTF.
+ - **REFACTOR**: Have no idea.
+ - **REFACTOR**: Add platform files to gitignore.
+ - **REFACTOR**: Update Flutter version. Add melos. Add new linter rules. Fix lint errors.
+ - **REFACTOR**: Remove platform-dependand files.
+ - **FIX**: Add root package to melos. Add some overrides file.
+ - **FIX**: Check CI. Update roadmap.
+ - **FIX**: Check CI.
+ - **FIX**: Fix flutter version.
+ - **FIX**: Upgrade packages, add melos, format.
+
+## 2.0.4
+
+ - **REFACTOR**: -.
+ - **REFACTOR**: WTF.
+ - **REFACTOR**: WTF.
+ - **REFACTOR**: WTF.
+ - **REFACTOR**: WTF.
+ - **REFACTOR**: Have no idea.
+ - **REFACTOR**: Add platform files to gitignore.
+ - **REFACTOR**: Update Flutter version. Add melos. Add new linter rules. Fix lint errors.
+ - **REFACTOR**: Remove platform-dependand files.
+ - **FIX**: Add root package to melos. Add some overrides file.
+ - **FIX**: Check CI. Update roadmap.
+ - **FIX**: Check CI.
+ - **FIX**: Fix flutter version.
+ - **FIX**: Upgrade packages, add melos, format.
+
 ## 2.0.2
 * Fix "disabled" state of widget for a short time at first appearance, thanks to sharp eye and effort of Maksim Zakharov
 
