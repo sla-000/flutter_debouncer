@@ -1,6 +1,7 @@
 name: tap_debouncer
 
 packages:
+  - '.'
   - '*'
   - '**'
 

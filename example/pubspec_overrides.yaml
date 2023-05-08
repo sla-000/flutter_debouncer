@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: tap_debouncer
+dependency_overrides:
+  tap_debouncer:
+    path: ..
