@@ -1,3 +1,2 @@
 - Publish to pub.dev after merge PR and check master
 - Add tests
-- Add analyze and test badges to readme
