@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-05-10
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`tap_debouncer` - `v2.0.7`](#tap_debouncer---v207)
+
+---
+
+#### `tap_debouncer` - `v2.0.7`
+
+ - **FIX**: Fix publish.
+ - **FIX**: Add publish to master action.
+
+## 2.0.7
+
+ - **FIX**: Fix publish.
+ - **FIX**: Add publish to master action.
+
+
 ## 2023-05-09
 
 ### Changes
