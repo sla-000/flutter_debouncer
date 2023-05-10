@@ -1,6 +1,6 @@
 name: tap_debouncer
 description: Tap debounce simplifying widget. Wrap your button widget in TapDebounce widget and any taps will be disabled while tap callback is in progress.
-version: 2.0.9
+version: 2.0.10
 homepage: https://github.com/sla-000/flutter_debouncer
 repository: https://github.com/sla-000/flutter_debouncer
 

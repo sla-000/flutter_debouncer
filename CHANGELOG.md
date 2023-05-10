@@ -15,6 +15,35 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`tap_debouncer` - `v2.0.10`](#tap_debouncer---v2010)
+
+---
+
+#### `tap_debouncer` - `v2.0.10`
+
+ - **FIX**: Call local melos.
+ - **FIX**: Remove melos clean.
+ - **FIX**: Replace global melos with local one.
+
+## 2.0.10
+
+ - **FIX**: Call local melos.
+ - **FIX**: Remove melos clean.
+ - **FIX**: Replace global melos with local one.
+
+
+## 2023-05-10
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`tap_debouncer` - `v2.0.9`](#tap_debouncer---v209)
 
 ---
