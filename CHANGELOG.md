@@ -15,6 +15,31 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`tap_debouncer` - `v2.0.8`](#tap_debouncer---v208)
+
+---
+
+#### `tap_debouncer` - `v2.0.8`
+
+ - **FIX**: Fix publish.
+
+## 2.0.8
+
+ - **FIX**: Fix publish.
+
+
+## 2023-05-10
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`tap_debouncer` - `v2.0.7`](#tap_debouncer---v207)
 
 ---
