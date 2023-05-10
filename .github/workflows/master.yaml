@@ -36,4 +36,5 @@ jobs:
           tags: true
           force: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          
+      - name: Publish to pub.dev
+        uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
