@@ -2,7 +2,10 @@ name: Publish to pub.dev
 
 on:
   push:
+    branches:
+      - master
     tags:
+      - 'tap_debouncer-v[0-9]+.[0-9]+.[0-9]+*'
 
 jobs:
   publish:
