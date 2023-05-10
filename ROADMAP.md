@@ -1,2 +1,1 @@
-- Publish to pub.dev after merge PR and check master
 - Add tests
