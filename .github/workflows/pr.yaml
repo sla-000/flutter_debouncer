@@ -17,10 +17,15 @@ jobs:
           flutter-version: '3.7.0'
           channel: 'stable'
       - name: Flutter version
-        run: flutter --version
+        run: |
+          flutter --version
       - name: Init
-        run: flutter pub global activate melos 3.0.1
+        run: |
+          flutter pub get
       - name: Bootstrap
-        run: flutter pub global run melos bs
+        run: |
+          flutter pub run melos clean && \
+          flutter pub run melos bs
       - name: Check format, analyze and test
-        run: flutter pub global run melos run check
+        run: |
+          flutter pub run melos run check
