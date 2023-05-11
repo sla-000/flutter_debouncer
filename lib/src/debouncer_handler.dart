@@ -10,9 +10,7 @@ class DebouncerHandler {
   Stream<bool> get busyStream => _busyController.stream;
 
   /// Dispose resources
-  void dispose() {
-    unawaited(_busyController.close());
-  }
+  void dispose() => unawaited(_busyController.close());
 
   /// Process onTap
   Future<void> onTap(Future<void> Function() onTap) async {
