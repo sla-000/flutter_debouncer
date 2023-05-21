@@ -28,6 +28,7 @@ jobs:
       - uses: hrishikesh-kadam/setup-lcov@v1
       - name: Check source
         run: |
+          lcov --version && \
           dart run melos run check
       - name: Set git user
         run: |
