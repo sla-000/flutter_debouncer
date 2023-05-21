@@ -26,6 +26,7 @@ analyzer:
     # Turned off until null-safe rollout is complete.
     # unnecessary_null_comparison: ignore
     invalid_dependency: ignore
+    unused_element: ignore
     unused_local_variable: error
   exclude:
     - "bin/cache/**"

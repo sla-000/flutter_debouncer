@@ -12,20 +12,20 @@ class DebouncerHandler {
   /// Dispose resources
   void dispose() => unawaited(_busyController.close());
 
-  /// Process onTap
-  Future<void> onTap(Future<void> Function() onTap) async {
+  /// Process onTap function
+  Future<void> onTap(Future<void> Function() function) async {
     try {
-      if (!_busyController.isClosed) {
-        _busyController.add(true);
-      }
+      _add(true);
 
-      await onTap();
-    } on Exception catch (_) {
-      rethrow;
+      await function();
     } finally {
-      if (!_busyController.isClosed) {
-        _busyController.add(false);
-      }
+      _add(false);
+    }
+  }
+
+  void _add(bool value) {
+    if (!_busyController.isClosed) {
+      _busyController.add(value);
     }
   }
 }

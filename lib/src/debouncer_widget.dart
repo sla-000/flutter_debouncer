@@ -17,12 +17,12 @@ class TapDebouncer extends StatefulWidget {
   /// then disable button forever
   static const Duration kNeverCooldown = Duration(days: 100000000);
 
-  /// Main button builder function
+  /// Function that builds button
   /// context is current context
   /// onTap is function to pass to SomeButton or InkWell
   final Widget Function(BuildContext context, TapDebouncerFunc? onTap) builder;
 
-  /// Waiting button builder function
+  /// Function that builds special button in wait state
   /// context is current context
   /// child is widget returning from builder method with onTap equal null
   final Widget Function(BuildContext context, Widget child)? waitBuilder;
@@ -61,21 +61,23 @@ class _TapDebouncerState extends State<TapDebouncer> {
           final isBusy = snapshot.data!;
 
           if (!isBusy) {
+            final onTap = widget.onTap;
+
             return widget.builder(
               context,
-              widget.onTap == null
+              onTap == null
                   ? null
-                  : () async {
-                      await _tapDebouncerHandler.onTap(
+                  : () async => _tapDebouncerHandler.onTap(
                         () async {
-                          await widget.onTap!();
+                          await onTap();
 
-                          if (widget.cooldown != null) {
-                            await Future<void>.delayed(widget.cooldown!);
+                          final cooldown = widget.cooldown;
+
+                          if (cooldown != null) {
+                            await Future<void>.delayed(cooldown);
                           }
                         },
-                      );
-                    },
+                      ),
             );
           }
 

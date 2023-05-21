@@ -24,67 +24,70 @@ void main() {
     reset(mockOnTap);
   });
 
-  group('DebouncerHandler tests - ', () {
-    test(
-      'WHEN debouncerHandler created '
-      'THEN should emit init value',
-      () async {
-        expect(
-          debouncerHandler.busyStream,
-          emitsInOrder(
-            [
-              emits(false),
-            ],
-          ),
-        );
-      },
-    );
+  group(
+    'DebouncerHandler tests - ',
+    () {
+      test(
+        'WHEN debouncerHandler created '
+        'THEN should emit init value',
+        () async {
+          expect(
+            debouncerHandler.busyStream,
+            emitsInOrder(
+              [
+                emits(false),
+              ],
+            ),
+          );
+        },
+      );
 
-    test(
-      'WHEN onTap called '
-      'THEN should emit correct values',
-      () async {
-        await debouncerHandler.onTap(mockOnTap);
+      test(
+        'WHEN onTap called '
+        'THEN should emit correct values',
+        () async {
+          await debouncerHandler.onTap(mockOnTap);
 
-        expect(
-          debouncerHandler.busyStream,
-          emitsInOrder(
-            [
-              emits(false),
-              emits(true),
-              emits(false),
-            ],
-          ),
-        );
+          expect(
+            debouncerHandler.busyStream,
+            emitsInOrder(
+              [
+                emits(false),
+                emits(true),
+                emits(false),
+              ],
+            ),
+          );
 
-        verify(mockOnTap.call).called(1);
-      },
-    );
+          verify(mockOnTap.call).called(1);
+        },
+      );
 
-    test(
-      'WHEN onTap called and callback threw an exception '
-      'THEN should emit correct values and throw the same exception',
-      () async {
-        when(mockOnTap.call).thenAnswer((_) async => throw _Exception());
+      test(
+        'WHEN onTap called and callback threw an exception '
+        'THEN should emit correct values and throw the same exception',
+        () async {
+          when(mockOnTap.call).thenAnswer((_) async => throw _Exception());
 
-        expect(
-          () => debouncerHandler.onTap(mockOnTap),
-          throwsA(isA<_Exception>()),
-        );
+          expect(
+            () => debouncerHandler.onTap(mockOnTap),
+            throwsA(isA<_Exception>()),
+          );
 
-        expect(
-          debouncerHandler.busyStream,
-          emitsInOrder(
-            [
-              emits(false),
-              emits(true),
-              emits(false),
-            ],
-          ),
-        );
+          expect(
+            debouncerHandler.busyStream,
+            emitsInOrder(
+              [
+                emits(false),
+                emits(true),
+                emits(false),
+              ],
+            ),
+          );
 
-        verify(mockOnTap.call).called(1);
-      },
-    );
-  });
+          verify(mockOnTap.call).called(1);
+        },
+      );
+    },
+  );
 }

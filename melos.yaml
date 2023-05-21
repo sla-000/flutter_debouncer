@@ -9,31 +9,36 @@ scripts:
   format:
     description: "Format"
     run: |
-      flutter pub run melos exec -- dart format .
+      dart run melos exec -- dart format .
 
   analyze:
     description: "Analyze"
     run: |
-      flutter pub run melos exec -c 1 -- dart analyze
+      dart run melos exec -c 1 -- flutter analyze
 
-  _format:
+  check_format:
     description: "Check format"
     run: |
-      flutter pub run melos exec -c 1 -- flutter format -n --set-exit-if-changed .
+      dart run melos exec -c 1 -- dart format --set-exit-if-changed .
 
   test:
     description: "Test"
     run: |
-      flutter pub run melos exec -c 1 -- dart test .
+      dart run melos exec -c 1 -- flutter test .
 
   check:
     description: "Check format, analyze and test"
     run: |
-      flutter pub run melos run _format && \
-      flutter pub run melos run analyze && \
-      flutter pub run melos run test
+      dart run melos run check_format && \
+      dart run melos run analyze && \
+      dart run melos run test
 
   upgrade:
     description: "Upgrade"
     run: |
-      flutter pub run melos exec -c 1 -- flutter pub upgrade --major-versions
+      dart run melos exec -c 1 -- flutter pub upgrade --major-versions
+
+  fix:
+    description: "Fix"
+    run: |
+      dart pub melos exec -c 1 -- dart fix --apply
