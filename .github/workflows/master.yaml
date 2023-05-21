@@ -6,7 +6,7 @@ on:
 jobs:
   test:
     name: Check the source code
-    runs-on: ubuntu-22.10
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
@@ -25,7 +25,6 @@ jobs:
       - name: Bootstrap
         run: |
           dart run melos bs
-      - uses: hrishikesh-kadam/setup-lcov@v1
       - name: Check source
         run: |
           lcov --version && \

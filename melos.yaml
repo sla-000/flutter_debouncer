@@ -15,20 +15,20 @@ scripts:
   analyze:
     description: "Analyze"
     run: |
-      dart run melos exec -c 1 --\
+      dart run melos exec --concurrency=1 --\
         flutter analyze
 
   check_format:
     description: "Check format"
     run: |
-      dart run melos exec -c 1 --\
+      dart run melos exec --concurrency=1 --\
         dart format --set-exit-if-changed .
 
   test:
     description: "Test"
     run: |
-      dart run melos exec -c 1 --\
-        flutter test .
+      dart run melos exec --concurrency=1 --\
+        flutter test --coverage -j 1 .
 
   check:
     description: "Check format, analyze and test"
@@ -36,29 +36,25 @@ scripts:
       dart run melos run check_format && \
       dart run melos run analyze && \
       dart run melos run test && \
-      dart run melos run check_coverage
+      dart run melos run coverage
 
   upgrade:
     description: "Upgrade"
     run: |
-      dart run melos exec -c 1 --\
+      dart run melos exec --concurrency=1 --\
         flutter pub upgrade --major-versions
 
   fix:
     description: "Fix"
     run: |
-      dart run melos exec -c 1 --\
+      dart run melos exec --concurrency=1 --\
         dart fix --apply
 
   coverage:
-    description: "Coverage"
-    run: |
-      dart run melos exec --concurrency=1 --\
-        flutter test --coverage -j 1
-
-  check_coverage:
     description: "Check coverage"
     run: |
-      dart run melos run coverage && \
-      lcov --fail-under-lines=90 --summary coverage/lcov.info
-      
+      dart pub global activate test_cov_console && \
+      result=$(test_cov_console --pass=90) && \
+      [ $result == "PASSED" ]
+#      lcov --fail-under-lines=90 --summary coverage/lcov.info
+
