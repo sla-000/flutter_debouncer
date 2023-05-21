@@ -15,6 +15,31 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`tap_debouncer` - `v2.2.0`](#tap_debouncer---v220)
+
+---
+
+#### `tap_debouncer` - `v2.2.0`
+
+ - **FEAT**: Upgrade flutter. Update lint rules. Add coverage check.
+
+## 2.2.0
+
+ - **FEAT**: Upgrade flutter. Update lint rules. Add coverage check.
+
+
+## 2023-05-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`tap_debouncer` - `v2.1.0`](#tap_debouncer---v210)
 
 ---
