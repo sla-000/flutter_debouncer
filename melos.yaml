@@ -26,8 +26,8 @@ scripts:
       dirExists:
         - test
     run: |
-      dart pub global activate test_cov_console && \
-      passed=$(test_cov_console --pass=90) && eval [ $passed == "PASSED" ]
+      dart pub global activate check_coverage && \
+      cat coverage/lcov.info | check_coverage 90
   #      lcov --fail-under-lines=90 --summary coverage/lcov.info
 
   fix:
