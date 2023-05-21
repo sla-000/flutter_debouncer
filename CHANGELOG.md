@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-05-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`tap_debouncer` - `v2.1.0`](#tap_debouncer---v210)
+
+---
+
+#### `tap_debouncer` - `v2.1.0`
+
+ - **FIX**: Add DebouncerHandler test.
+ - **FEAT**: Add tests. Refactor.
+
+## 2.1.0
+
+ - **FIX**: Add DebouncerHandler test.
+ - **FEAT**: Add tests. Refactor.
+
+
 ## 2023-05-10
 
 ### Changes
