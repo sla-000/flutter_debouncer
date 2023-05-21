@@ -17,28 +17,22 @@ jobs:
           flutter-version: '3.10.0'
           channel: 'stable'
       - name: Flutter version
-        shell: bash
         run: |
           flutter --version
       - name: Init
-        shell: bash
         run: |
           flutter pub get
       - name: Bootstrap
-        shell: bash
         run: |
           dart run melos bs
       - name: Check source
-        shell: bash
         run: |
           dart run melos run check
       - name: Set git user
-        shell: bash
         run: |
           git config --global user.email "sla.000@ya.ru" && \
           git config --global user.name "Github Action"
       - name: Version upgrade
-        shell: bash
         run: |
           dart run melos version --yes
       - name: Commit & Push changes
