@@ -9,13 +9,11 @@ class _MockOnTap extends Mock {
   Future<void> call();
 }
 
-class _Exception extends Mock implements Exception {}
-
 void main() {
   final mockOnTap = _MockOnTap();
 
   setUp(() {
-    when(mockOnTap).thenAnswer((_) async {});
+    when(mockOnTap.call).thenAnswer((_) async {});
   });
 
   tearDown(() {
@@ -35,7 +33,7 @@ void main() {
               await tester.pumpWidget(
                 _TestWidget(
                   child: TapDebouncer(
-                    onTap: mockOnTap,
+                    onTap: mockOnTap.call,
                     builder: (context, onTap) => _TapTarget(onTap: onTap),
                   ),
                 ),
@@ -45,7 +43,7 @@ void main() {
               await tester.tap(_findButton);
               await tester.tap(_findButton);
 
-              verify(mockOnTap).called(3);
+              verify(mockOnTap.call).called(3);
             },
           );
 
@@ -55,14 +53,14 @@ void main() {
             (tester) async {
               final busy = Completer<void>();
 
-              when(mockOnTap).thenAnswer(
+              when(mockOnTap.call).thenAnswer(
                 (_) async => busy.future,
               );
 
               await tester.pumpWidget(
                 _TestWidget(
                   child: TapDebouncer(
-                    onTap: mockOnTap,
+                    onTap: mockOnTap.call,
                     builder: (context, onTap) => _TapTarget(onTap: onTap),
                   ),
                 ),
@@ -80,7 +78,7 @@ void main() {
               busy.complete();
               await tester.pumpAndSettle();
 
-              verify(mockOnTap).called(1);
+              verify(mockOnTap.call).called(1);
             },
           );
 
@@ -90,12 +88,12 @@ void main() {
             (tester) async {
               final busy = Completer<void>();
 
-              when(mockOnTap).thenAnswer((_) => busy.future);
+              when(mockOnTap.call).thenAnswer((_) => busy.future);
 
               await tester.pumpWidget(
                 _TestWidget(
                   child: TapDebouncer(
-                    onTap: mockOnTap,
+                    onTap: mockOnTap.call,
                     builder: (context, onTap) => _TapTarget(onTap: onTap),
                   ),
                 ),
@@ -104,7 +102,7 @@ void main() {
               await tester.tap(_findButton);
               await tester.pumpAndSettle();
 
-              verify(mockOnTap).called(1);
+              verify(mockOnTap.call).called(1);
 
               busy.complete();
               await tester.pumpAndSettle();
@@ -112,7 +110,7 @@ void main() {
               await tester.tap(_findButton);
               await tester.pumpAndSettle();
 
-              verify(mockOnTap).called(1);
+              verify(mockOnTap.call).called(1);
             },
           );
         },
@@ -131,7 +129,7 @@ void main() {
                     _TestWidget(
                       child: TapDebouncer(
                         cooldown: const Duration(milliseconds: 250),
-                        onTap: mockOnTap,
+                        onTap: mockOnTap.call,
                         builder: (context, onTap) => _TapTarget(onTap: onTap),
                       ),
                     ),
@@ -150,7 +148,7 @@ void main() {
                   await tester.tap(_findButton);
                   await tester.pumpAndSettle();
 
-                  verify(mockOnTap).called(1);
+                  verify(mockOnTap.call).called(1);
                 },
               );
             },
@@ -166,7 +164,7 @@ void main() {
                     _TestWidget(
                       child: TapDebouncer(
                         cooldown: const Duration(milliseconds: 100),
-                        onTap: mockOnTap,
+                        onTap: mockOnTap.call,
                         builder: (context, onTap) => _TapTarget(onTap: onTap),
                       ),
                     ),
@@ -175,7 +173,7 @@ void main() {
                   await tester.tap(_findButton);
                   await tester.pumpAndSettle();
 
-                  verify(mockOnTap).called(1);
+                  verify(mockOnTap.call).called(1);
 
                   await Future.delayed(const Duration(milliseconds: 150));
                   await tester.pumpAndSettle();
@@ -183,7 +181,7 @@ void main() {
                   await tester.tap(_findButton);
                   await tester.pumpAndSettle();
 
-                  verify(mockOnTap).called(1);
+                  verify(mockOnTap.call).called(1);
                 },
               );
             },
@@ -200,7 +198,7 @@ void main() {
             (tester) async {
               final busy = Completer<void>();
 
-              when(mockOnTap).thenAnswer((_) async => busy.future);
+              when(mockOnTap.call).thenAnswer((_) async => busy.future);
 
               await tester.pumpWidget(
                 _TestWidget(
@@ -209,7 +207,7 @@ void main() {
                       opacity: 0.5,
                       child: child,
                     ),
-                    onTap: mockOnTap,
+                    onTap: mockOnTap.call,
                     builder: (context, onTap) => _TapTarget(onTap: onTap),
                   ),
                 ),

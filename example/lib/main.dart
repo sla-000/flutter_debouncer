@@ -121,7 +121,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: onTap,
                     child: const Center(child: Text('Long')),
                   ),
-                  // alternative with using waitBuilder instead of test onTap for null
+                  // alternative with using waitBuilder
+                  // instead of test onTap for null
                   waitBuilder: (_, Widget child) => Stack(
                     children: <Widget>[
                       child,

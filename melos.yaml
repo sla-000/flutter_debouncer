@@ -9,36 +9,56 @@ scripts:
   format:
     description: "Format"
     run: |
-      dart run melos exec -- dart format .
+      dart run melos exec --\
+        dart format .
 
   analyze:
     description: "Analyze"
     run: |
-      dart run melos exec -c 1 -- flutter analyze
+      dart run melos exec -c 1 --\
+        flutter analyze
 
   check_format:
     description: "Check format"
     run: |
-      dart run melos exec -c 1 -- dart format --set-exit-if-changed .
+      dart run melos exec -c 1 --\
+        dart format --set-exit-if-changed .
 
   test:
     description: "Test"
     run: |
-      dart run melos exec -c 1 -- flutter test .
+      dart run melos exec -c 1 --\
+        flutter test .
 
   check:
     description: "Check format, analyze and test"
     run: |
       dart run melos run check_format && \
       dart run melos run analyze && \
-      dart run melos run test
+      dart run melos run test && \
+      dart run melos run check_coverage
 
   upgrade:
     description: "Upgrade"
     run: |
-      dart run melos exec -c 1 -- flutter pub upgrade --major-versions
+      dart run melos exec -c 1 --\
+        flutter pub upgrade --major-versions
 
   fix:
     description: "Fix"
     run: |
-      dart pub melos exec -c 1 -- dart fix --apply
+      dart run melos exec -c 1 --\
+        dart fix --apply
+
+  coverage:
+    description: "Coverage"
+    run: |
+      dart run melos exec --concurrency=1 --\
+        flutter test --coverage -j 1
+
+  check_coverage:
+    description: "Check coverage"
+    run: |
+      dart run melos run coverage && \
+      lcov --fail-under-lines=90 --summary coverage/lcov.info
+      

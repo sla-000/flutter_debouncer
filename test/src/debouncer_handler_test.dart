@@ -46,7 +46,7 @@ void main() {
         'WHEN onTap called '
         'THEN should emit correct values',
         () async {
-          await debouncerHandler.onTap(mockOnTap);
+          await debouncerHandler.onTap(mockOnTap.call);
 
           expect(
             debouncerHandler.busyStream,
@@ -70,7 +70,7 @@ void main() {
           when(mockOnTap.call).thenAnswer((_) async => throw _Exception());
 
           expect(
-            () => debouncerHandler.onTap(mockOnTap),
+            () => debouncerHandler.onTap(mockOnTap.call),
             throwsA(isA<_Exception>()),
           );
 

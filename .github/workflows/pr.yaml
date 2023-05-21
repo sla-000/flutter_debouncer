@@ -14,7 +14,7 @@ jobs:
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.12'
+          flutter-version: '3.10.0'
           channel: 'stable'
       - name: Flutter version
         run: |
@@ -25,6 +25,7 @@ jobs:
       - name: Bootstrap
         run: |
           flutter pub run melos bs
+      - uses: hrishikesh-kadam/setup-lcov@v1
       - name: Check format, analyze and test
         run: |
           flutter pub run melos run check

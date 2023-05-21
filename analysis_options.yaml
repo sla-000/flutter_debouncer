@@ -20,12 +20,6 @@ analyzer:
     strict-casts: true
     strict-raw-types: true
   errors:
-    # allow self-reference to deprecated members (we do this because otherwise we have
-    # to annotate every member in every test, assert, etc, when we deprecate something)
-    # deprecated_member_use_from_same_package: ignore
-    # Turned off until null-safe rollout is complete.
-    # unnecessary_null_comparison: ignore
-    invalid_dependency: ignore
     unused_element: ignore
     unused_local_variable: error
   exclude:
@@ -40,12 +34,12 @@ linter:
     - always_declare_return_types
     - always_put_control_body_on_new_line
 #    - always_put_required_named_parameters_first
-#    - always_require_non_null_named_parameters #(deprecated)
+#    - always_require_non_null_named_parameters # (deprecated)
 #    - always_specify_types # too much work
     - always_use_package_imports
     - annotate_overrides
     - avoid_annotating_with_dynamic
-#    - avoid_as #deprecated
+    - avoid_as
     - avoid_bool_literals_in_conditional_expressions
     - avoid_catches_without_on_clauses
     - avoid_catching_errors
@@ -70,8 +64,8 @@ linter:
     - avoid_relative_lib_imports
     - avoid_renaming_method_parameters
     - avoid_return_types_on_setters
-#    - avoid_returning_null #(deprecated)
-#    - avoid_returning_null_for_future #(deprecated)
+#    - avoid_returning_null # (deprecated)
+#    - avoid_returning_null_for_future # (deprecated)
     - avoid_returning_null_for_void
     - avoid_returning_this
     - avoid_setters_without_getters
@@ -102,7 +96,8 @@ linter:
     - dangling_library_doc_comments
     - depend_on_referenced_packages
     - deprecated_consistency
-#    - diagnostic_describe_all_properties
+    - deprecated_member_use_from_same_package
+#    - diagnostic_describe_all_properties # I'm too lazy
     - directives_ordering
     - discarded_futures
     - do_not_use_environment
@@ -113,27 +108,31 @@ linter:
     - eol_at_end_of_file
     - exhaustive_cases
     - file_names
-#    - flutter_style_todos #stupid
+#    - flutter_style_todos # stupid
     - hash_and_equals
     - implementation_imports
-#    - implicit_call_tearoffs
-#    - invariant_booleans #deprecated
-    - iterable_contains_unrelated_type
+    - implicit_call_tearoffs
+    - implicit_reopen # (experimental)
+    - invalid_case_patterns # (experimental)
+#    - invariant_booleans # was removed in Dart '3.0.0'
+#    - iterable_contains_unrelated_type # (deprecated)
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
     - library_annotations
     - library_names
     - library_prefixes
     - library_private_types_in_public_api
-#    - lines_longer_than_80_chars #
-    - list_remove_unrelated_type
+    - lines_longer_than_80_chars
+#    - list_remove_unrelated_type # (deprecated)
     - literal_only_boolean_expressions
+    - matching_super_parameters
     - missing_whitespace_between_adjacent_strings
     - no_adjacent_strings_in_list
     - no_default_cases #(experimental)
     - no_duplicate_case_values
     - no_leading_underscores_for_library_prefixes
     - no_leading_underscores_for_local_identifiers
+    - no_literal_bool_comparisons
     - no_logic_in_create_state
     - no_runtimeType_toString
     - non_constant_identifier_names
@@ -151,7 +150,7 @@ linter:
     - prefer_adjacent_string_concatenation
     - prefer_asserts_in_initializer_lists
     - prefer_asserts_with_message
-#    - prefer_bool_in_asserts #deprecated
+#    - prefer_bool_in_asserts # was removed in Dart '3.0.0'
     - prefer_collection_literals
     - prefer_conditional_assignment
     - prefer_const_constructors
@@ -161,7 +160,7 @@ linter:
     - prefer_constructors_over_static_methods
     - prefer_contains
 #    - prefer_double_quotes
-    - prefer_equal_for_default_values
+#    - prefer_equal_for_default_values # was removed in Dart '3.0.0'
     - prefer_expression_function_bodies
     - prefer_final_fields
     - prefer_final_in_for_each
@@ -190,7 +189,7 @@ linter:
     - prefer_typing_uninitialized_variables
     - prefer_void_to_null
     - provide_deprecation_message
-#    - public_member_api_docs #too annoying
+#    - public_member_api_docs # too annoying
     - recursive_getters
     - require_trailing_commas
     - secure_pubspec_urls
@@ -201,16 +200,17 @@ linter:
     - sort_constructors_first
     - sort_pub_dependencies
     - sort_unnamed_constructors_first
-#    - super_goes_last #deprecated
+#    - super_goes_last # was removed in Dart '3.0.0'
     - test_types_in_equals
     - throw_in_finally
     - tighten_type_of_initializing_formals
     - type_annotate_public_apis
     - type_init_formals
+    - type_literal_in_constant_pattern
     - unawaited_futures
     - unnecessary_await_in_return
     - unnecessary_brace_in_string_interps
-#    - unnecessary_breaks #is not a recognized lint rule
+    - unnecessary_breaks
     - unnecessary_const
     - unnecessary_constructor_name
 #    - unnecessary_final
@@ -221,7 +221,7 @@ linter:
     - unnecessary_new
     - unnecessary_null_aware_assignments
     - unnecessary_null_aware_operator_on_extension_on_nullable
-    - unnecessary_null_checks #(experimental)
+    - unnecessary_null_checks # (experimental)
     - unnecessary_null_in_if_null_operators
     - unnecessary_nullable_for_final_variable_declarations
     - unnecessary_overrides
@@ -232,10 +232,10 @@ linter:
     - unnecessary_string_interpolations
     - unnecessary_this
     - unnecessary_to_list_in_spreads
-    - unreachable_from_main #(experimental)
+    - unreachable_from_main # (experimental)
     - unrelated_type_equality_checks
     - unsafe_html
-    - use_build_context_synchronously #(experimental)
+    - use_build_context_synchronously # (experimental)
     - use_colored_box
     - use_decorated_box
     - use_enums
@@ -251,7 +251,7 @@ linter:
     - use_setters_to_change_properties
     - use_string_buffers
     - use_string_in_part_of_directives
-    - use_super_parameters #(experimental)
+    - use_super_parameters # (experimental)
     - use_test_throws_matchers
     - use_to_and_as_if_applicable
     - valid_regexps
