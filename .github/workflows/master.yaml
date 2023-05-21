@@ -14,7 +14,7 @@ jobs:
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.12'
+          flutter-version: '3.10.0'
           channel: 'stable'
       - name: Flutter version
         run: |
@@ -24,17 +24,18 @@ jobs:
           flutter pub get
       - name: Bootstrap
         run: |
-          flutter pub run melos bs
-      - name: Analyze
+          dart run melos bs
+      - uses: hrishikesh-kadam/setup-lcov@v1
+      - name: Check source
         run: |
-          flutter pub run melos run check
+          dart run melos run check
       - name: Set git user
         run: |
           git config --global user.email "sla.000@ya.ru" && \
           git config --global user.name "Github Action"
       - name: Version upgrade
         run: |
-          flutter pub run melos version --yes
+          dart run melos version --yes
       - name: Commit & Push changes
         uses: actions-js/push@v1.4
         with:

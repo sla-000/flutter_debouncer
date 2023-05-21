@@ -24,8 +24,8 @@ jobs:
           flutter pub get
       - name: Bootstrap
         run: |
-          flutter pub run melos bs
+          dart run melos bs
       - uses: hrishikesh-kadam/setup-lcov@v1
-      - name: Check format, analyze and test
+      - name: Check source
         run: |
-          flutter pub run melos run check
+          dart run melos run check
