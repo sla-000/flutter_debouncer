@@ -27,7 +27,7 @@ scripts:
         - test
     run: |
       dart pub global activate test_cov_console && \
-      passed=$(test_cov_console --pass=90) && [ $passed == "PASSED" ]
+      passed=$(test_cov_console --pass=90) && eval [ $passed == "PASSED" ]
   #      lcov --fail-under-lines=90 --summary coverage/lcov.info
 
   fix:
