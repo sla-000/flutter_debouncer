@@ -52,7 +52,6 @@ scripts:
 
   coverage:
     description: "Check coverage"
-    shell: bash
     run: |
       dart pub global activate test_cov_console && \
       result=$(test_cov_console --pass=90) && \

@@ -17,14 +17,18 @@ jobs:
           flutter-version: '3.10.0'
           channel: 'stable'
       - name: Flutter version
+        shell: bash
         run: |
           flutter --version
       - name: Init
+        shell: bash
         run: |
           flutter pub get
       - name: Bootstrap
+        shell: bash
         run: |
           dart run melos bs
       - name: Check source
+        shell: bash
         run: |
           dart run melos run check
