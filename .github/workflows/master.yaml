@@ -43,4 +43,9 @@ jobs:
           tags: true
           force: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload coverage
+        uses: coverallsapp/github-action@v2.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: coverage/lcov.info
 
