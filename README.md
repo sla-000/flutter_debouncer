@@ -1,7 +1,9 @@
 <a href="https://github.com/sla-000/flutter_debouncer/actions">
 <img src="https://github.com/sla-000/flutter_debouncer/actions/workflows/master.yaml/badge.svg" alt="Analyze and tests status">
 </a>
+
 [![Coverage Status](https://coveralls.io/repos/github/sla-000/flutter_debouncer/badge.svg?branch=master)](https://coveralls.io/github/sla-000/flutter_debouncer?branch=master)
+
 <a href="https://opensource.org/licenses/MIT">
 <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"/>
 </a>
